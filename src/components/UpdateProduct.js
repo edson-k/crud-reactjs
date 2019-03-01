@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import AppSetting from './AppSetting';
 import $ from "jquery";
+import validateForm from './ValidationForm';
 
 class UpdateProduct extends Component {
   constructor(props) {
@@ -64,7 +65,9 @@ class UpdateProduct extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.validateForm()) {
+    const errors = validateForm(this.state);
+    this.setState({ errors: errors });
+    if (!Object.keys(errors).length) {
       const product = {
         code: this.state.productCode, 
         description: this.state.productDescription, 
@@ -80,60 +83,6 @@ class UpdateProduct extends Component {
     } else {
       $('.invalid-feedback').css({display:'block'});
     }
-  }
-
-  validateForm() {
-    let errors = {};
-    let formIsValid = true;
-
-    if (!this.state.productCode) {
-      formIsValid = false;
-      errors["code"] = "*Please enter product code.";
-    }
-
-    if (!this.state.productDescription) {
-      formIsValid = false;
-      errors["description"] = "*Please enter product description.";
-    }
-
-    if (!this.state.produtctShortDescription) {
-      formIsValid = false;
-      errors["shortDescription"] = "*Please enter product short description.";
-    }
-
-    if (!this.state.productStatus) {
-      formIsValid = false;
-      errors["status"] = "*Please enter product status.";
-    }
-
-    if (!this.state.productValue) {
-      formIsValid = false;
-      errors["value"] = "*Please enter product value.";
-    }
-
-    if (typeof this.state.productValue !== "undefined") {
-      if (!this.state.productValue.match(/^[0-9]+\.?[0-9]*$/)) {
-        formIsValid = false;
-        errors["value"] = "*Please enter valid value no.";
-      }
-    }
-
-    if (!this.state.productQty) {
-      formIsValid = false;
-      errors["qty"] = "*Please enter product qty.";
-    }
-
-    if (typeof this.state.productQty !== "undefined") {
-      if (!this.state.productQty.match(/^[0-9]*$/)) {
-        formIsValid = false;
-        errors["qty"] = "*Please enter valid qty no.";
-      }
-    }
-
-    this.setState({
-      errors: errors
-    });
-    return formIsValid;
   }
 
   render(){
