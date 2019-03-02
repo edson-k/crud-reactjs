@@ -15,8 +15,8 @@ const MainMenu = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <ul className="navbar-nav">
           <li className="nav-item nav-link"><Link to="/">Home</Link></li>
-          <li className="nav-item nav-link"><Link to="add-item">Create Product</Link></li>
-          <li className="nav-item nav-link"><Link to="display-item">Products</Link></li>
+          <li className="nav-item nav-link"><Link to="/add-item">Create Product</Link></li>
+          <li className="nav-item nav-link"><Link to="/display-item">Products</Link></li>
         </ul>
       </nav>
     </div>

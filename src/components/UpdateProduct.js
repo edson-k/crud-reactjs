@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AppSetting from './AppSetting';
 import $ from "jquery";
 import validateForm from './ValidationForm';
+import FormProduct from './FormProduct';
 
 class UpdateProduct extends Component {
   constructor(props) {
@@ -79,6 +80,8 @@ class UpdateProduct extends Component {
       let uri = AppSetting.url + '/api/products/'+this.props.match.params.id;
       axios.put(uri, product).then((response) => {
         this.props.history.push('/display-item');
+      }).catch(function (error) {
+        console.log(error);
       });
     } else {
       $('.invalid-feedback').css({display:'block'});
@@ -96,65 +99,11 @@ class UpdateProduct extends Component {
           </div>
         </div>
         <form className="needs-validation" onSubmit={this.handleSubmit} noValidate>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Product Code:</label>
-                  <input type="text" className="form-control" required="required" value={this.state.productCode} maxLength="10" onChange={this.handleProductCodeChange} />
-                  <div className="invalid-feedback">{this.state.errors.code}</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Product Description:</label><br />
-                  <textarea className="form-control col-md-12" required="required" value={this.state.productDescription} maxLength="150" onChange={this.handleProductDescriptionChange}></textarea>
-                  <div className="invalid-feedback">{this.state.errors.description}</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Product Short Description:</label>
-                  <input type="text" className="form-control" value={this.state.produtctShortDescription} maxLength="30" onChange={this.handleProductShortDescriptionChange} />
-                  <div className="invalid-feedback">{this.state.errors.shortDescription}</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Product Qty:</label>
-                  <input type="text" className="form-control" required="required" value={this.state.productQty} maxLength="10" onChange={this.handleProductQtyChange} />
-                  <div className="invalid-feedback">{this.state.errors.qty}</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Product Value:</label>
-                  <input type="text" className="form-control" required="required" value={this.state.productValue} maxLength="10" onChange={this.handleProductValueChange} />
-                  <div className="invalid-feedback">{this.state.errors.value}</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Product Status:</label><br />
-                  <input type="radio" checked={this.state.productStatus === "enable"} id="enable" value="enable" onClick={this.handleProductStatusChange}/><label htmlFor="enable">Enable</label> &nbsp;&nbsp;
-                  <input type="radio" checked={this.state.productStatus === "disable"} id="disable" value="disable" onClick={this.handleProductStatusChange}/><label htmlFor="disable">Disable</label>
-                  <div className="invalid-feedback">{this.state.errors.status}</div>
-                </div>
-              </div>
-            </div>
-            <br />
-            <div className="form-group">
-                <button className="btn btn-primary">Update</button>
-            </div>
+          <FormProduct thisObject={this}/>
+          <br />
+          <div className="form-group">
+              <button className="btn btn-primary">Update</button>
+          </div>
         </form>
     </div>
     )

@@ -3,6 +3,7 @@ import AppSetting from './AppSetting';
 import axios from 'axios';
 import $ from "jquery";
 import validateForm from './ValidationForm';
+import FormProduct from './FormProduct';
 
 class CreateProduct extends Component {
   constructor(props){
@@ -72,61 +73,7 @@ class CreateProduct extends Component {
       <div>
         <h1>Create Product</h1>
         <form className="needs-validation" onSubmit={this.handleSubmit} noValidate>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Product Code:</label>
-                <input type="text" className="form-control" required="required" maxLength="10" onChange={this.handleProductCodeChange} />
-                <div className="invalid-feedback">{this.state.errors.code}</div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Product Description:</label><br />
-                <textarea className="form-control col-md-12" required="required" maxLength="150" onChange={this.handleProductDescriptionChange}></textarea>
-                <div className="invalid-feedback">{this.state.errors.description}</div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Product Short Description:</label>
-                <input type="text" className="form-control" maxLength="30" onChange={this.handleProductShortDescriptionChange} />
-                <div className="invalid-feedback">{this.state.errors.shortDescription}</div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Product Qty:</label>
-                <input type="text" className="form-control" required="required" maxLength="10" onChange={this.handleProductQtyChange} />
-                <div className="invalid-feedback">{this.state.errors.qty}</div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Product Value:</label>
-                <input type="text" className="form-control" required="required" maxLength="10" onChange={this.handleProductValueChange} />
-                <div className="invalid-feedback">{this.state.errors.value}</div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Product Status:</label><br />
-                <input type="radio" name="this.state.productStatus" id="enable" value="enable" onClick={this.handleProductStatusChange}/><label htmlFor="enable">Enable</label> &nbsp;&nbsp;
-                <input type="radio" name="this.state.productStatus" id="disable" value="disable" onClick={this.handleProductStatusChange}/><label htmlFor="disable">Disable</label>
-                <div className="invalid-feedback">{this.state.errors.status}</div>
-              </div>
-            </div>
-          </div>
+          <FormProduct thisObject={this}/>
           <br />
           <div className="form-group">
             <button className="btn btn-primary">Add Product</button>
